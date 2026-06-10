@@ -87,4 +87,4 @@ CREATE INDEX IF NOT EXISTS idx_sync_run_items_change_type ON sync_run_items(chan
 CREATE INDEX IF NOT EXISTS idx_sync_snapshots_run_id ON sync_snapshots(sync_run_id);
 CREATE INDEX IF NOT EXISTS idx_users_sourced_id ON users(sourced_id);
 CREATE INDEX IF NOT EXISTS idx_classes_sourced_id ON classes(sourced_id);
-CREATE INDEX IF NOT EXISTS idx_enrollments_sourced_id ON enrollments(sourced_id);wh
+CREATE INDEX IF NOT EXISTS idx_enrollments_sourced_id ON enrollments(sourced_id);
