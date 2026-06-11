@@ -3,6 +3,7 @@ import multer from 'multer'
 import db from '../db/pool.js'
 import { parseBundle } from '../services/csvParser.js'
 import { computeDiff } from '../services/diffEngine.js'
+import { applySync, rollbackSync } from '../services/applySync.js'
 
 
 const syncRouter = express.Router()
@@ -124,6 +125,26 @@ syncRouter.post('/:id/resolve', async (req, res) => {
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: error.message })
+    }
+})
+
+syncRouter.post('/:id/apply', async (req, res) => {
+    try {
+        await applySync(req.params.id)
+        res.json({ ok: true })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: err.message })
+    }
+})
+
+syncRouter.post('/:id/rollback', async (req, res) => {
+    try {
+        await rollbackSync(req.params.id)
+        res.json({ ok: true })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: err.message })
     }
 })
 
