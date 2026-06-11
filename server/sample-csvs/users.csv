@@ -1,0 +1,9 @@
+sourcedId,givenName,familyName,email,role,orgSourcedId,status
+USR-001,Sarah,Chen,s.chen@lincoln.edu,teacher,ORG-002,active
+USR-002,Marcus,Webb,m.webb@lincoln.edu,teacher,ORG-002,active
+USR-003,James,Park,j.park.new@students.edu,student,ORG-002,active
+USR-004,Priya,Nair,p.nair@students.edu,student,ORG-002,active
+USR-005,Diego,Reyes,d.reyes@students.edu,student,ORG-003,active
+USR-006,Aisha,Okafor,a.okafor@students.edu,student,ORG-003,active
+USR-007,Lena,Kim,l.kim@students.edu,student,ORG-002,active
+USR-099,Jake,Smith,j.park@students.edu,student,ORG-002,active

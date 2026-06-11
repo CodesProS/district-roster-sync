@@ -267,11 +267,16 @@ export async function rollbackSync(syncRunId) {
 
             if (snap.entity_type === 'user') {
                 await client.query(`
-                    UPDATE users SET
-                        first_name = $1, last_name = $2, email = $3,
-                        role = $4, status = $5
-                    WHERE id = $6
-                `, [data.first_name, data.last_name, data.email, data.role, data.status, snap.entity_id]);
+        UPDATE users SET email = concat('_rollback_', id, '@placeholder.invalid')
+        WHERE email = $1 AND id != $2
+    `, [data.email, snap.entity_id]);
+
+                await client.query(`
+        UPDATE users SET
+            first_name = $1, last_name = $2, email = $3,
+            role = $4, status = $5
+        WHERE id = $6
+    `, [data.first_name, data.last_name, data.email, data.role, data.status, snap.entity_id]);
             }
 
             if (snap.entity_type === 'org') {

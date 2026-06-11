@@ -1,0 +1,9 @@
+sourcedId,userSourcedId,classSourcedId,role,status
+ENR-001,USR-001,CLS-001,teacher,active
+ENR-002,USR-002,CLS-002,teacher,active
+ENR-003,USR-003,CLS-001,student,active
+ENR-004,USR-004,CLS-001,student,active
+ENR-005,USR-003,CLS-002,student,tobedeleted
+ENR-006,USR-005,CLS-003,student,active
+ENR-007,USR-006,CLS-003,student,active
+ENR-008,USR-007,CLS-001,student,active

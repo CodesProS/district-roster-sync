@@ -96,7 +96,7 @@ syncRouter.get('/:id/preview', async (req, res) => {
         res.status(200).json({
             sync_run: sync_row_results.rows[0],
             stats: sync_row_results.rows[0].stats,
-            items: merged
+            grouped: merged
         })
     } catch (error) {
         console.log(error)

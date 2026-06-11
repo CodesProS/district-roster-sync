@@ -1,0 +1,5 @@
+sourcedId,title,orgSourcedId,termSourcedId,status
+CLS-001,Biology 101,ORG-002,TERM-001,active
+CLS-002,Algebra II,ORG-002,TERM-001,active
+CLS-003,Earth Science,ORG-003,TERM-001,active
+CLS-004,Chemistry 101,ORG-002,TERM-001,active
