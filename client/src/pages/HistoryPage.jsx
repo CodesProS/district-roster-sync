@@ -47,6 +47,9 @@ export default function HistoryPage() {
                 }}>
                     New sync
                 </a>
+                <a href="/sync/health" style={{ fontSize: 13, color: '#666' }}>
+                    Data health →
+                </a>
             </div>
 
             {runs.length === 0 ? (
