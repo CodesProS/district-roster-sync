@@ -1,0 +1,54 @@
+Instruction Set B — SIS Rostering and Sync Operations
+
+WHAT I BUILT
+A full-stack SIS roster sync pipeline for district admins. Upload OneRoster CSV files,
+preview what will change, resolve conflicts, apply the sync, and roll back if needed,
+all with a persistent audit trail.
+
+WHO IT'S FOR
+District admins syncing student, teacher, and class data from their SIS into Almaa EDU
+each semester.
+
+THE PROBLEM IT SOLVES
+Without a governed sync workflow, roster imports are manual and error-prone. One bad CSV
+can create duplicates, drop enrollments, or orphan students with no way to recover. This
+pipeline makes imports previewable, conflict-aware, and reversible.
+
+DATA MODEL
+Existing Almaa EDU tables: orgs, terms, users, classes, enrollments
+
+sync tables:
+  sync_runs       one row per upload attempt, tracks status, actor, timestamps, stats
+  sync_run_items  one row per changed entity, stores incoming and current data side by side
+  sync_snapshots  pre-change state for rollback
+
+API
+  POST  /api/sync/upload        parse CSVs, compute diff, create sync run
+  GET   /api/sync/runs          list sync history
+  GET   /api/sync/:id/preview   diff grouped by change type
+  POST  /api/sync/:id/resolve   save conflict resolutions
+  POST  /api/sync/:id/apply     write changes to DB
+  POST  /api/sync/:id/rollback  restore pre-sync state
+  GET   /api/health             data health indicators
+
+FRONTEND
+  Upload page       file inputs for 5 OneRoster CSV types
+  Preview page      diff table, stat cards, conflict resolution, apply button
+  History page      sync runs with status, stats, rollback button
+  Data health page  orphaned students, classes without teachers, stale enrollments
+
+INTEGRATION NOTES
+Replace mock Almaa EDU table queries in diffEngine.js and applySync.js with calls to
+Almaa's existing data layer. The three sync tables are new and can be added via the
+migration in 001_init.sql. Routes mount cleanly under /api/sync.
+
+TRADEOFFS
+  Auth is mocked, production needs real role-based auth scoped to district and school
+  Rollback is partial, new adds are not deleted on rollback, acceptable per spec
+  No pagination, fine for prototype scale
+
+NEXT STEPS
+  Real district admin auth with role scoping
+  Incremental syncs using dateLastModified from OneRoster
+  Per-field diff display for updates so admins see exactly what changed
+  Email notifications when a sync completes or fails
